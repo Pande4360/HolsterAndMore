@@ -22,37 +22,55 @@ You can use basic game functions, XINPUT calls or with markmons plugin also trig
 2. A XINPUT CALL is probably best handled in the Xinput secition so you can forward a variable from the Zone section to the Xinput section, e.g.
 
     if RZone== 1 and rGrabActive then
+   
       isButtonY=true
+   
     end
+   
 
 Now add this to your XINPUT callback:
+
   if isButtonY then
-      pressButton(state, XINPUT_GAMEPAD_Y)        
+  
+      pressButton(state, XINPUT_GAMEPAD_Y)    
+      
   end
 
 3. A Keyboard press can be handeled in many ways, e.g. you create a variable here and trigger the action somewhere else doesnt really matter and is just a question to keep the script readable
  
   if RZone== 1 and rGrabActive then
+  
       isKey1=true
+      
       SendKeyDown('1') 
+      
   end
 
   More importantly you need to Unpress the key somewhere BEFORE that. the next time the callback is done it unpresses the key if you let go of grip
   So this part is ALWAYS BEFORE the zone definition aboev. It doesnt matter where you call it could be right before it:
 
   if isKey1==true then
+  
     iskey1=false
+    
     SendKeyUp('1')
+    
   end
 
   The final Result may look like this:
   
   if isKey1==true then
+  
     iskey1=false
+    
     SendKeyUp('1')
+    
   end
   
   if RZone== 1 and rGrabActive then
+  
       isKey1=true
+      
       SendKeyDown('1') 
+      
   end
