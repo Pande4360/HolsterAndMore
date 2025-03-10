@@ -326,21 +326,7 @@ local rControllerIndex= 2
 --------------
 --------------
 
---FUNCTION FOR ZONES, dont edit this
-local function RCheckZone(Zmin,Zmax,Ymin,Ymax,Xmin,Xmax) -- Z: UP/DOWN, Y:RIGHT LEFT, X FORWARD BACKWARD, checks if RHand is in RZone
-	if RHandNewZ > Zmin and RHandNewZ < Zmax and RHandNewY > Ymin and RHandNewY < Ymax and RHandNewX > Xmin and RHandNewX < Xmax then
-		return true
-	else 
-		return false
-	end
-end
-local function LCheckZone(Zmin,Zmax,Ymin,Ymax,Xmin,Xmax) -- Z: UP/DOWN, Y:RIGHT LEFT, X FORWARD BACKWARD, checks if LHand is in LZone
-	if LHandNewZ > Zmin and LHandNewZ < Zmax and LHandNewY > Ymin and LHandNewY < Ymax and LHandNewX > Xmin and LHandNewX < Xmax then
-		return true
-	else 
-		return false
-	end
-end
+
 
 
 --USEABLE FUNCTIONS:
@@ -763,7 +749,21 @@ uevr.sdk.callbacks.on_pre_engine_tick(
 		end
 	end
 	
-	
+	--FUNCTION FOR ZONES, dont edit this
+local function RCheckZone(Zmin,Zmax,Ymin,Ymax,Xmin,Xmax) -- Z: UP/DOWN, Y:RIGHT LEFT, X FORWARD BACKWARD, checks if RHand is in RZone
+	if RHandNewZ > Zmin and RHandNewZ < Zmax and RHandNewY > Ymin and RHandNewY < Ymax and RHandNewX > Xmin and RHandNewX < Xmax then
+		return true
+	else 
+		return false
+	end
+end
+local function LCheckZone(Zmin,Zmax,Ymin,Ymax,Xmin,Xmax) -- Z: UP/DOWN, Y:RIGHT LEFT, X FORWARD BACKWARD, checks if LHand is in LZone
+	if LHandNewZ > Zmin and LHandNewZ < Zmax and LHandNewY > Ymin and LHandNewY < Ymax and LHandNewX > Xmin and LHandNewX < Xmax then
+		return true
+	else 
+		return false
+	end
+end
 	
 	-----EDIT HERE-------------
 	---------------------------
@@ -774,7 +774,7 @@ uevr.sdk.callbacks.on_pre_engine_tick(
 	elseif RCheckZone(-10, 15, -30, -5, -5, 20)      then
 		isHapticZoneR =true
 		RZone=2--Left Shoulder
-	elseif RCheckZone(0, 20, -5, 5, 0, 10)  then
+	elseif RCheckZone(0, 20, -5, 5, 0, 20)  then
 		isHapticZoneR= true
 		RZone=3-- Over Head
 	elseif RCheckZone(-100,-60,22,50,-10,10)   then
@@ -806,10 +806,10 @@ uevr.sdk.callbacks.on_pre_engine_tick(
 	if LCheckZone(-10, 15, 5, 30, -5, 20) then
 		isHapticZoneL =true
 		LZone=1-- RShoulder
-	elseif LCheckZoneLHandNewZ (-10, 15, -30, -10, -5, 20) then
+	elseif LCheckZone (-10, 15, -30, -10, -5, 20) then
 		isHapticZoneL =true
 		LZone=2--Left Shoulder
-	elseif LCheckZone(0, 20, -5, 5, 0, 10) then
+	elseif LCheckZone(0, 20, -5, 5, 0, 20) then
 		isHapticZoneL= true
 		LZone=3-- Over Head
 	elseif LCheckZone(-100,-60,22,50,-10,10)  then
@@ -911,9 +911,9 @@ uevr.sdk.callbacks.on_pre_engine_tick(
 		elseif LZone== 8 and lGrabActive then
 		--	pawn:EquipFlashbang()
 		elseif LZone== 6 and lGrabActive then
-			pawn.Inventory:SwitchToAltGrenade()
+			--pawn.Inventory:SwitchToAltGrenade()
 		elseif LZone== 7 and lGrabActive then
-			pawn.Inventory:SwitchToFragGrenade()
+		--	pawn.Inventory:SwitchToFragGrenade()
 		elseif RZone==1 and rGrabActive then
 		--	pawn:EquipLongTactical()
 		elseif RZone==4 and rGrabActive then
